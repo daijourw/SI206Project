@@ -41,6 +41,6 @@ def write_csv(data, filename):
             writer.writerow(item)
 
 movies = movielst('https://www.imdb.com/list/ls008939186/')
-#write_csv(movies,'movies.csv')
+write_csv(movies,'movies.csv')
 
 
