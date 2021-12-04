@@ -40,7 +40,7 @@ def movielst(url):
 #Write movie list into a csv file
 
 def write_csv(data, filename):
-    header = ('Movie Title', 'Movie Date', 'Rating', 'Genre')
+    header = ('Movie Title', 'Movie Date', 'Rating')
 
     with open(filename, 'w', newline='') as f:
         writer = csv.writer(f)
@@ -57,22 +57,22 @@ def setUpDatabase(db_name):
 
 #Create movie table if not exists
 def setUpMovieTable( cur, conn, movielst):
-    movielst
-
-    cur.execute("CREATE TABLE IF NOT EXISTS Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid INTEGER, gross INTEGER, awards INTEGER, imdb rating INTEGER, metascore INTEGER, rotten tomatoes INTEGER, average rating INTEGER")
+    cur.execute("CREATE TABLE IF NOT EXISTS Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid INTEGER, gross INTEGER, awards INTEGER, imdb rating INTEGER, metascore INTEGER, rotten tomatoes INTEGER, average rating INTEGER)")
     for num in range(len(movielst)):
         cur.execute("INSERT INTO Movies (id,title,date) VALUES (?,?,?)",(num,movielst[num][0],movielst[num][1]))
     conn.commit()
 
 #create genre table is not exists
-def setUpGenreTable(genrelst, cur, conn):
-    cur.execute("CREATE TABLE IF NOT EXISTS Genres (id INTEGER PRIMARY KEY, genre TEXT")
-    for num in range(len(genrelst)):
-        cur.execute("INSERT INTO Genres (id, genre) VALUES (?,?)", (num, genrelst[num]))
+def setUpGenreTable(cur, conn, genrelst):
+    cur.execute("CREATE TABLE IF NOT EXISTS Genres (id INTEGER PRIMARY KEY, genre TEXT)")
+    for i in range(len(genrelst)):
+        cur.execute("INSERT OR IGNORE INTO Genres (id, genre) VALUES (?,?)", (i, genrelst[i]))
     conn.commit()
 
 
 def main():
+    cur, conn = setUpDatabase('movieData.db')
+
     genres = ['Action', 'Animation', 'Biography', 'Comedy', 'Drama', 'Family', 'Fantasy', 'Horror', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Sport', 'Thriller', 'War', 'Western']
     m1 = movielst('https://www.imdb.com/list/ls008939186/') 
     m2 = movielst('https://www.imdb.com/list/ls054431555/')
@@ -81,7 +81,8 @@ def main():
     
     write_csv(movies,'movies.csv')
 
-    setUpDatabase('movie_data')
-    setUpGenreTable(genres, cur, conn)
+    setUpGenreTable( cur, conn, genres)
     setUpMovieTable( cur, conn, movies)
+
+main()
 
