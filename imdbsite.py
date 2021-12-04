@@ -31,6 +31,11 @@ def movielst(url):
 
     return movielst
 
+#def bmovielst(url):
+#https://www.imdb.com/list/ls054431555/
+
+
+
 def write_csv(data, filename):
     header = ('Movie Title', 'Movie Date', 'Rating')
 
@@ -40,7 +45,10 @@ def write_csv(data, filename):
         for item in data:
             writer.writerow(item)
 
-movies = movielst('https://www.imdb.com/list/ls008939186/')
+
+m1 = movielst('https://www.imdb.com/list/ls008939186/') 
+m2 = movielst('https://www.imdb.com/list/ls054431555/')
+movies = m1 + m2
 write_csv(movies,'movies.csv')
 
 
