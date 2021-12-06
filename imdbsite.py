@@ -57,7 +57,7 @@ def setUpDatabase(db_name):
 
 #Create movie table if not exists
 def setUpMovieTable( cur, conn, movielst):
-    cur.execute("CREATE TABLE IF NOT EXISTS Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid INTEGER, gross INTEGER, awards INTEGER, imdb rating INTEGER, metascore INTEGER, rotten tomatoes INTEGER, average rating INTEGER)")
+    cur.execute("CREATE TABLE IF NOT EXISTS Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid INTEGER, gross INTEGER, awards INTEGER, imdb rating INTEGER, metascore INTEGER, rotten tomatoes INTEGER)")
     for num in range(len(movielst)):
         cur.execute("INSERT INTO Movies (id,title,date) VALUES (?,?,?)",(num,movielst[num][0],movielst[num][1]))
     conn.commit()
@@ -73,7 +73,7 @@ def setUpGenreTable(cur, conn, genrelst):
 def main():
     cur, conn = setUpDatabase('movieData.db')
 
-    genres = ['Action', 'Animation', 'Biography', 'Comedy', 'Drama', 'Family', 'Fantasy', 'Horror', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Sport', 'Thriller', 'War', 'Western']
+    genres = ['Action', 'Animation', 'Biography', 'Comedy', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Film-Noir', 'Horror', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Sport', 'Thriller', 'War', 'Western']
     m1 = movielst('https://www.imdb.com/list/ls008939186/') 
     m2 = movielst('https://www.imdb.com/list/ls054431555/')
     movies = m1 + m2
