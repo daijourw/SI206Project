@@ -73,7 +73,7 @@ def setUpGenreTable(cur, conn, genrelst):
 def main():
     cur, conn = setUpDatabase('movieData.db')
 
-    genres = ['Action', 'Animation', 'Biography', 'Comedy', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Film-Noir', 'Horror', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Sport', 'Thriller', 'War', 'Western']
+    genres = ['Action', 'Adventure', 'Animation', 'Biography', 'Comedy', 'Documentary', 'Drama', 'Family', 'Fantasy', 'Film-Noir', 'Horror', 'Musical', 'Mystery', 'Romance', 'Sci-Fi', 'Sport', 'Thriller', 'War', 'Western']
     m1 = movielst('https://www.imdb.com/list/ls008939186/') 
     m2 = movielst('https://www.imdb.com/list/ls054431555/')
     movies = m1 + m2
