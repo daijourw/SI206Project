@@ -137,7 +137,7 @@ def scatter_movies(dict1,dict2):
     ax.set_ylabel('Gross')
     ax.set_xlabel('Average Rating')
     ax.set_title('Gross vs Average Rating')
-    # ax.set_xticks(x, labels)
+    #ax.set_xticks(x, wrating)
     ax.legend()
 
     plt.show()
