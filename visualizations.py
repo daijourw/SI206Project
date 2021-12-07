@@ -14,7 +14,7 @@ import sqlite3
 
 
 #dictionary { title, date, genre, gross, awards, IMDB, metacritic, rotten_tomatoes}
-def getData(db_filename):
+def getGenreGrossData(db_filename):
     path = os.path.dirname(os.path.abspath(__file__))
     conn = sqlite3.connect(path+'/'+db_filename)
     cur = conn.cursor()
@@ -90,4 +90,5 @@ def barchart_movies(dict1,dict2):
 
     plt.show()
 
-def barchart_movies(dict1,dict2)
+def scatter_movies(dict1,dict2):
+    #get title and rating and put in dictionary then go through databsse to get gross
