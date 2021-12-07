@@ -7,18 +7,22 @@ import sqlite3
 #possibly use dictionary instead of csv bc of racing issue
 #CREATE TABLE Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid TEXT, gross INTEGER, awards TEXT, IMDB REAL, metacritic REAL, rotten_tomatoes REAL, average rating REAL)
 
+
 def getRatings():
     api_key = 'd8af6faf'
-
+    rest_rows = []
     with open('movies.csv', 'r') as file:
         reader = csv.reader(file)
         count = 0
         dbName ='movieData.db'
         conn = sqlite3.connect(dbName)
         cursor = conn.cursor()
-        next(reader)
+        #next(reader)
         for row in reader:
-            #print(row)
+            #print(row)           
+            if count == 25:
+                rest_rows.append(row)
+                continue
             title = row[0]
             parameters = {'t': title, 'apikey': api_key}
             response_obj = requests.get('https://www.omdbapi.com/', params=parameters)
@@ -49,6 +53,11 @@ def getRatings():
                             break
             
                 ratings_dict_list = data['Ratings']
+                IMD_rating = 0
+                RottenTomatoes_rating = 0
+                Metacritic_rating = 0
+                id = 0
+
                 for dictionary in ratings_dict_list:
                     if dictionary['Source'] == 'Internet Movie Database':
                         IMD_rating = float(dictionary.get('Value', 0).split('/')[0]) #* 10 
@@ -68,7 +77,6 @@ def getRatings():
                 # print("rotten_tomatoe rating is: ", RottenTomatoes_rating)
     
                 print(" ")
-                count += 1
 
                 print(count)
                 print(" ") 
@@ -85,12 +93,15 @@ def getRatings():
                 cursor.execute("UPDATE Movies SET metascore = ? WHERE title = ?", (Metacritic_rating, title))
                 cursor.execute("UPDATE Movies SET rotten_tomatoes = ? WHERE title = ?", (RottenTomatoes_rating, title))
 
+                count += 1
 
-                if count == 24:
-                    break
+                    
 
                 #cursor.execute("UPDATE Movies SET (genreid, gross, awards, imdb_rating, metascore, rotten_tomatoes) values (?,?,?,?,?,?) ", (id, gross, Awards_Won,  IMD_rating, Metacritic_rating, RottenTomatoes_rating))
                 
         conn.commit()
-            
-getRatings() 
+        if rest_rows:
+            with open('movies.csv', 'w') as file:    
+                writer = csv.writer(file)
+                writer.writerows(rest_rows)
+getRatings()
