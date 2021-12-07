@@ -92,3 +92,55 @@ def barchart_movies(dict1,dict2):
 
 def scatter_movies(dict1,dict2):
     #get title and rating and put in dictionary then go through databsse to get gross
+    path = os.path.dirname(os.path.abspath(__file__))
+    conn = sqlite3.connect(path+'/movieData.db')
+    cur = conn.cursor()
+
+    bmovieRatings = {}
+    wmovieRatings = {}
+
+    with open('movies.csv', 'r') as file:
+        reader = csv.reader(file)
+        for row in reader[0:100]:
+            title = row[0]
+            rating = row[-1]
+            bmovieRatings[title] = [rating]
+        for row in reader[100:]:
+            title = row[0]
+            rating = row[-1]
+            wmovieRatings[title] = [rating]
+        
+    for movie in bmovieRatings:
+        cur.execute('SELECT gross FROM Movies WHERE title ='+movie)
+        for row in cur:
+            bmovieRatings[movie].append(row[0])
+    for movie in wmovieRatings:
+        cur.execute('SELECT gross FROM Movies WHERE title ='+movie)
+        for row in cur:
+            wmovieRatings[movie].append(row[0])
+    wgross = []
+    wrating = []
+    bgross = []
+    brating = []
+    
+    for item in wmovieRatings.values():
+        wgross.append(item[1])
+        wrating.append(item[0])
+    for item in bmovieRatings.values():
+        bgross.append(item[1])
+        brating.append(item[0])
+    
+    fig,ax = plt.subplots()
+    ax.plot(wrating, wgross)
+    ax.plot(bgross, brating)
+
+    ax.set_ylabel('Gross')
+    ax.set_xlabel('Average Rating')
+    ax.set_title('Gross vs Average Rating')
+    # ax.set_xticks(x, labels)
+    ax.legend()
+
+    plt.show()
+
+
+        
