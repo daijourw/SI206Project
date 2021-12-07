@@ -57,7 +57,7 @@ def setUpDatabase(db_name):
 
 #Create movie table if not exists
 def setUpMovieTable( cur, conn, movielst):
-    cur.execute("CREATE TABLE IF NOT EXISTS Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid INTEGER, gross INTEGER, awards INTEGER, imdb rating FLOAT, metascore FLOAT, rotten tomatoes FLOAT)")
+    cur.execute("CREATE TABLE IF NOT EXISTS Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid INTEGER, gross INTEGER, awards INTEGER, imdb_rating FLOAT, metascore FLOAT, rotten_tomatoes FLOAT)")
     for num in range(len(movielst)):
         cur.execute("INSERT INTO Movies (id,title,date) VALUES (?,?,?)",(num,movielst[num][0],movielst[num][1]))
     conn.commit()
