@@ -106,30 +106,38 @@ def getRatings():
                 writer = csv.writer(file)
                 writer.writerows(rest_rows)
 
-def ratings_csv(data, filename):
+def ratings_csv(filename):
     header = ('Movie Title', 'Movie Date', 'Average Rating')
 
     dbName ='movieData.db'
     conn = sqlite3.connect(dbName)
     cursor = conn.cursor()
-    cursor.execute('SELECT title,genre,imdb_rating,metascore,rotten_tomatoes FROM Movies JOIN Genres ON Movies.genreid = Genres.id WHERE imdb_rating != ? AND metascore != ? AND rotten_tomatoes != ?',0,0,0)
+    cursor.execute('SELECT * FROM Movies JOIN Genres ON Movies.genreid = Genres.id WHERE imdb_rating != ? AND metascore != ? AND rotten_tomatoes != ?',(0,0,0,))
     with open(filename, 'w', newline ='') as file:
         writer = csv.writer(file)
         writer.writerow(header)
 
         for row in cursor:
-            imdb = row[2]* 100
-            meta = row[3]
-            rotten = row[4]
-
-            avgscore = (imdb+meta+rotten)/3
-            
-            writer.writerow(row)
+            #print(row)
+            imdb = row[-5]* 10
+            meta = row[-4]
+            rotten = row[-3]
+            #print(imdb,meta,rotten)
+            avgscore = (float(imdb)+float(meta)+float(rotten))//3
+            ro = list(row)
+            #print(avgscore)
+            r = [ro[1],ro[2],avgscore]
+            #print(r)
+            writer.writerow(r)
 
 
 def main():
-    for i in range(8):
+    for i in range(1,9):
         time.sleep(1)
         getRatings()
-        print("25 Items Collected")
+        hm = (i*25)
+        print(str(hm) + ' Items Collected')
     
+    ratings_csv('ratings.csv')
+    
+main()
