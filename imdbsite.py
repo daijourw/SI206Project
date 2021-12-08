@@ -56,11 +56,19 @@ def setUpDatabase(db_name):
     return cur, conn
 
 #Create movie table if not exists
-def setUpMovieTable( cur, conn, movielst):
-    cur.execute("CREATE TABLE IF NOT EXISTS Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid INTEGER, gross INTEGER, awards INTEGER, imdb_rating FLOAT, metascore FLOAT, rotten_tomatoes FLOAT)")
+def setUpMovieTable( cur, conn, movielst,label, x = 0):
+    cur.execute("CREATE TABLE IF NOT EXISTS Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid INTEGER, gross INTEGER, awards INTEGER, imdb_rating FLOAT, metascore FLOAT, rotten_tomatoes FLOAT, label INTEGER)")
     for num in range(len(movielst)):
-        cur.execute("INSERT INTO Movies (id,title,date) VALUES (?,?,?)",(num,movielst[num][0],movielst[num][1]))
+        id = num + x
+        cur.execute("INSERT INTO Movies (id,title,date,label) VALUES (?,?,?,?)",(id,movielst[num][0],movielst[num][1],label))
     conn.commit()
+# def setUpMovieTable2( cur, conn, movielst,label):
+#     cur.execute("CREATE TABLE IF NOT EXISTS Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid INTEGER, gross INTEGER, awards INTEGER, imdb_rating FLOAT, metascore FLOAT, rotten_tomatoes FLOAT, label INTEGER)")
+#     for num in range(len(movielst)):
+#         id = num + 100
+#         cur.execute("INSERT INTO Movies (id,title,date,label) VALUES (?,?,?,?)",(id,movielst[num][0],movielst[num][1],label))
+#     conn.commit()
+
 
 #create genre table is not exists
 def setUpGenreTable(cur, conn, genrelst):
@@ -82,7 +90,8 @@ def main():
     write_csv(movies,'movies.csv')
 
     setUpGenreTable( cur, conn, genres)
-    setUpMovieTable( cur, conn, movies)
+    setUpMovieTable( cur, conn, m1,0)
+    setUpMovieTable( cur, conn, m2,1,100)
 
 main()
 

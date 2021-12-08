@@ -33,12 +33,13 @@ def getRatings():
                 date = data.get('Year', 0)
                 gross = data.get('BoxOffice', "$0")
                 if gross == 'N/A':
-                    gross = "$0"
-                gross_list = (gross[1:].split(","))
-                gross_int = ""
-                for num in gross_list:
-                    gross_int += num
-                gross_int = int(gross_int)
+                    gross = 0
+                else:
+                    gross_list = (gross[1:].split(","))
+                    gross_int = ""
+                    for num in gross_list:
+                        gross_int += num
+                    gross = int(gross_int)
                 #print("gross_int is equal to:", gross_int)
                 genre = data.get('Genre', 'Not Provided')
                 if genre != 'Not Provided':
@@ -119,14 +120,16 @@ def ratings_csv(filename):
 
         for row in cursor:
             #print(row)
-            imdb = row[-5]* 10
-            meta = row[-4]
-            rotten = row[-3]
+            imdb = row[-6]* 10
+            meta = row[-5]
+            rotten = row[-4]
             #print(imdb,meta,rotten)
-            avgscore = (float(imdb)+float(meta)+float(rotten))//3
+            score = (float(imdb)+float(meta)+float(rotten))
+            avg = score//3
+            #print(avg,score)
             ro = list(row)
             #print(avgscore)
-            r = [ro[1],ro[2],avgscore]
+            r = [ro[1],ro[2],avg]
             #print(r)
             writer.writerow(r)
 
