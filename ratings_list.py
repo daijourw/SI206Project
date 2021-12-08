@@ -3,6 +3,7 @@ import re
 import csv
 import json
 import sqlite3
+import time
 
 #possibly use dictionary instead of csv bc of racing issue
 #CREATE TABLE Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid TEXT, gross INTEGER, awards TEXT, IMDB REAL, metacritic REAL, rotten_tomatoes REAL, average rating REAL)
@@ -27,7 +28,7 @@ def getRatings():
             parameters = {'t': title, 'apikey': api_key}
             response_obj = requests.get('https://www.omdbapi.com/', params=parameters)
             data = response_obj.json()
-            print(data)
+            #print(data)
             if 'Error' not in data:
                 date = data.get('Year', 0)
                 gross = data.get('BoxOffice', "$0")
@@ -38,7 +39,7 @@ def getRatings():
                 for num in gross_list:
                     gross_int += num
                 gross_int = int(gross_int)
-                print("gross_int is equal to:", gross_int)
+                #print("gross_int is equal to:", gross_int)
                 genre = data.get('Genre', 'Not Provided')
                 if genre != 'Not Provided':
                     genre = genre.split(",")[0]
@@ -76,10 +77,10 @@ def getRatings():
                 # print("metacritic rating is: ", Metacritic_rating)
                 # print("rotten_tomatoe rating is: ", RottenTomatoes_rating)
     
-                print(" ")
+                #print(" ")
 
-                print(count)
-                print(" ") 
+                #print(count)
+                #print(" ") 
                 cursor.execute("SELECT * FROM Genres")
                 for row in cursor:
                     #print(row)
@@ -104,4 +105,31 @@ def getRatings():
             with open('movies.csv', 'w') as file:    
                 writer = csv.writer(file)
                 writer.writerows(rest_rows)
-getRatings()
+
+def ratings_csv(data, filename):
+    header = ('Movie Title', 'Movie Date', 'Average Rating')
+
+    dbName ='movieData.db'
+    conn = sqlite3.connect(dbName)
+    cursor = conn.cursor()
+    cursor.execute('SELECT title,genre,imdb_rating,metascore,rotten_tomatoes FROM Movies JOIN Genres ON Movies.genreid = Genres.id WHERE imdb_rating != ? AND metascore != ? AND rotten_tomatoes != ?',0,0,0)
+    with open(filename, 'w', newline ='') as file:
+        writer = csv.writer(file)
+        writer.writerow(header)
+
+        for row in cursor:
+            imdb = row[2]* 100
+            meta = row[3]
+            rotten = row[4]
+
+            avgscore = (imdb+meta+rotten)/3
+            
+            writer.writerow(row)
+
+
+def main():
+    for i in range(8):
+        time.sleep(1)
+        getRatings()
+        print("25 Items Collected")
+    
