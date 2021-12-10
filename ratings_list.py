@@ -123,13 +123,16 @@ def ratings_csv(filename):
             imdb = row[-6]* 10
             meta = row[-5]
             rotten = row[-4]
+            label = row[-3]
+            gross = row[4]
+            #print(row)
             #print(imdb,meta,rotten)
             score = (float(imdb)+float(meta)+float(rotten))
             avg = score//3
             #print(avg,score)
             ro = list(row)
             #print(avgscore)
-            r = [ro[1],ro[2],avg]
+            r = [ro[1],ro[2],avg,gross,label]
             #print(r)
             writer.writerow(r)
 

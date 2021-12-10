@@ -19,57 +19,30 @@ def getGenreGrossData(db_filename, label):
     path = os.path.dirname(os.path.abspath(__file__))
     conn = sqlite3.connect(path+'/'+db_filename)
     cur = conn.cursor()
-    genreavgw = {}
-    countw = {}
-    entryw = {}
+    genreavg = {}
+    count = {}
+    entry = {}
 
     genreavgb = {}
     countb = {}
     entryb = {}
 
     cur.execute('SELECT gross, genre FROM Movies JOIN Genres ON Movies.genreid = Genres.id WHERE label='+str(label),)
-    for row in cur:#(number,genre)
-        print(row)
-    #     gross = row[0]
-    #     genre = row[-1]
-    #     count +=1
-    #     if count == 100:
-    #         break
-    
-    # #w = cur[0][0:100]
-    # #b = cur[0][100:]
-    # for row in w:
-    #     gross = row[0]
-    #     genre = row[1]
+    for row in cur:#(number,genre) each adventure: avg gross
+        genre = row[-1]
+        gross = row[0]
 
-    #     if countw.get(genre,None) == None:
-    #         countw[genre] = gross
-    #         entryw[genre] = 1
-    #     else:
-    #         countw[genre] += gross
-    #         entryw[genre] += 1
+        if count.get(genre,None) == None:
+            count[genre] = gross
+            entry[genre] = 1
+        else:
+            count[genre] += gross
+            entry[genre] += 1
 
-    #     for key in countw.keys():
-    #         genre = key
-    #         avg = countw[key]/entryw[key]
-    #         genreavgw[genre] = avg
-    # for row in b:
-    #     gross = row[0]
-    #     genre = row[1]
-
-    #     if countb.get(genre,None) == None:
-    #         countb[genre] = gross
-    #         entryb[genre] = 1
-    #     else:
-    #         countb[genre] += gross
-    #         entryb[genre] += 1
-
-    #     for key in countb.keys():
-    #         genre = key
-    #         avg = countw[key]/entryw[key]
-    #         genreavgb[genre] = avg
-
-    # return genreavgw,genreavgb
+        for key in count.keys():
+            avg = count[key]//entry[key]
+            genreavg[key] = avg
+    return genreavg
 #dict{genre:val,}
 def barchart_movies(dict1,dict2):
     whitemovies = dict1
@@ -80,12 +53,13 @@ def barchart_movies(dict1,dict2):
     black = dict2.values()
     
     x = np.arange(len(labels))  # the label locations
-    width = 0.25  # the width of the bars
+    width = 0.4  # the width of the bars
 
     fig, ax = plt.subplots()
-    rects1 = ax.bar(x - width/2, white, width, label='White Movies')
-    rects2 = ax.bar(x + width/2, black, width, label='Black Movies')
-
+    # rects1 = ax.bar(x - width/2, white, width, label='White Movies')
+    # rects2 = ax.bar(x + width/2, black, width, label='Black Movies')
+    ects1 = ax.bar(x, white, width, label='White Movies')
+    rects2 = ax.bar(x, black, width, label='Black Movies')
     # Add some text for labels, title and custom x-axis tick labels, etc.
     ax.set_ylabel('Genres')
     ax.set_title('Gross by Genre and Category')
@@ -99,60 +73,74 @@ def barchart_movies(dict1,dict2):
     fig.savefig('BarGraph.jpeg')
     plt.show()
 
-def scatter_movies(dict1,dict2):
+def scatter_movies():
     #get title and rating and put in dictionary then go through databsse to get gross
     path = os.path.dirname(os.path.abspath(__file__))
     conn = sqlite3.connect(path+'/movieData.db')
     cur = conn.cursor()
 
-    bmovieRatings = {}
-    wmovieRatings = {}
+    movie1 = {}
+    movie2 = {}
 
-    with open('movies.csv', 'r') as file:
+    with open('ratings.csv', 'r') as file:
         reader = csv.reader(file)
-        for row in reader[0:100]:
+        next(reader)
+        for row in reader:
             title = row[0]
-            rating = row[-1]
-            bmovieRatings[title] = [rating]
-        for row in reader[100:]:
-            title = row[0]
-            rating = row[-1]
-            wmovieRatings[title] = [rating]
-        
-    for movie in bmovieRatings:
-        cur.execute('SELECT gross FROM Movies WHERE title ='+movie)
-        for row in cur:
-            bmovieRatings[movie].append(row[0])
-    for movie in wmovieRatings:
-        cur.execute('SELECT gross FROM Movies WHERE title ='+movie)
-        for row in cur:
-            wmovieRatings[movie].append(row[0])
+            rating = row[2]
+            type = row[-1]
+            gross = row[-2]
+            if int(type) == 0:
+                movie1[title] = [rating,gross]
+            else:
+                movie2[title] = [rating,gross]
+    wratings = []
     wgross = []
-    wrating = []
+    #print(movie1)
+    for key in movie1:
+        lst= movie1[key]
+        rating = lst[0]
+        gross = lst[1]
+        wratings.append(rating)
+        wgross.append(gross)
+    bratings = []
     bgross = []
-    brating = []
+    for key in movie2:
+        lst= movie2[key]
+        rating = lst[0]
+        gross = lst[1]
+        bratings.append(rating)
+        bgross.append(gross)
     
-    for item in wmovieRatings.values():
-        wgross.append(item[1])
-        wrating.append(item[0])
-    for item in bmovieRatings.values():
-        bgross.append(item[1])
-        brating.append(item[0])
+    #print(wgross,wratings)
     
-    fig,ax = plt.subplots()
-    ax.plot(wrating, wgross)
-    ax.plot(bgross, brating)
+    fig = plt.figure()
+    ax = fig.add_subplot(121)
+    ax2 = fig.add_subplot(122)
+    ax.scatter(wratings, wgross, color='g', marker='o',s=10,label='White Movies',edgecolor='black')
+    ax2.scatter(bratings, bgross, color='b',marker='x',s=10,label='Black Movies',edgecolor='black')
+    
+    #ax.set_xticks(range(0,100,10))
+    #plt.xscale('log')
+    #plt.yscale('log')
 
     ax.set_ylabel('Gross')
     ax.set_xlabel('Average Rating')
     ax.set_title('Gross vs Average Rating')
-    #ax.set_xticks(x, wrating)
-    ax.legend()
-    fig.savefig('ScatterGraph.jpeg')
+    ax2.set_ylabel('Gross')
+    ax2.set_xlabel('Average Rating')
+    ax2.set_title('Gross vs Average Rating')
+    
+    #ax.legend()
+    #fig.savefig('ScatterGraph.jpeg')
+    plt.tight_layout()
     plt.show()
 
 def main():
-    getGenreGrossData('movieData.db',0)
+    whitem = getGenreGrossData('movieData.db',0)
+    blackm = getGenreGrossData('movieData.db',1)
+    #barchart_movies(whitem,blackm)
+    scatter_movies()
     #barchart_movies(dictionaries)
     #scatter_movies(dictionaries)
         
