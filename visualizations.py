@@ -58,7 +58,7 @@ def barchart_movies(dict1,name):
     plt.title('Average Gross per Movie Category',fontdict = font1)
     plt.xticks(rotation=90)
     #fig.savefig('HW8BarGraph.jpeg')
-    plt.show()
+    #plt.show()
     plt.savefig(name)
     
     # x = np.arange(len(labels))  # the label locations
@@ -154,13 +154,13 @@ def scatter_movies():
     
     plt.savefig('ScatterGraph.jpeg')
     plt.tight_layout()
-    plt.show()
+    #plt.show()
 
 def main():
     whitem = getGenreGrossData('movieData.db',0)
     blackm = getGenreGrossData('movieData.db',1)
-    barchart_movies(whitem,'WBar.jpeg')
-    barchart_movies(blackm,'BBar.jpeg')
+    barchart_movies(blackm,'BarChartBlackMovies.jpeg')
+    barchart_movies(whitem,'BarChartWhiteMovies.jpeg')
     scatter_movies()
     #barchart_movies(dictionaries)
     #scatter_movies(dictionaries)
