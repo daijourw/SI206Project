@@ -57,7 +57,7 @@ def barchart_movies(dict1,name):
     average = dict1.values()
     font1 = {'family':'serif','color':'black','size':17}
     font2 = {'family':'serif','color':'black','size':14}
-    plt.figure(figsize=(9,7))
+    plt.figure(figsize=(9,11))
     plt.bar(genres,average,color=['black', 'red', 'green', 'orange', 'blue', 'pink','purple', 'cyan','yellow','grey'])
     plt.xlabel('Genre Category',fontdict = font2)
     plt.ylabel('Average Gross (millions)',fontdict = font2)

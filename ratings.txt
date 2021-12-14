@@ -1,0 +1,162 @@
+Movie Title,Movie Date,Average Rating,Gross,Movie Type
+"The Good, the Bad and the Ugly",1966,91.0,25100000,0
+The Godfather,1972,96.0,134966411,0
+Dr. No,1962,81.0,16067035,0
+For a Few Dollars More,1965,82.0,15000000,0
+A Fistful of Dollars,1964,81.0,14500000,0
+Werckmeister Harmonies,2000,90.0,25461,0
+Scarface,1983,76.0,45408703,0
+The Graduate,1967,83.0,104945305,0
+The Big Lebowski,1998,78.0,18034458,0
+Wall Street,1987,69.0,43848069,0
+Reservoir Dogs,1992,84.0,2832029,0
+Rain Man,1988,78.0,172825435,0
+Once Upon a Time in the West,1968,86.0,5321508,0
+Once Upon a Time in America,1984,81.0,5321508,0
+The Mission,1986,64.0,17218023,0
+Drive,2011,83.0,35061555,0
+Vertigo,1958,92.0,7705225,0
+The Intouchables,2011,72.0,10198820,0
+Django Unchained,2012,84.0,162805434,0
+Casino,1995,78.0,42512375,0
+Stand by Me,1986,82.0,52287414,0
+Pulp Fiction,1994,91.0,107928762,0
+Groundhog Day,1993,82.0,71073420,0
+In the Heat of the Night,1967,83.0,0,0
+High Noon,1952,88.0,0,0
+In the Mood for Love,2000,85.0,2738980,0
+Forrest Gump,1994,80.0,330455270,0
+Meet Joe Black,1998,53.0,44619100,0
+Beverly Hills Cop,1984,74.0,234760478,0
+Dumb and Dumber,1994,60.0,127175374,0
+Titanic,1997,80.0,659363944,0
+Top Gun,1986,59.0,180258178,0
+Amélie,2001,80.0,33225499,0
+Mean Streets,1973,88.0,32645,0
+Requiem for a Dream,2000,76.0,3635482,0
+The Exorcist,1973,81.0,232906145,0
+Zodiac,2007,81.0,33080084,0
+The Man with the Golden Arm,1955,72.0,0,0
+Death Rides a Horse,1967,49.0,0,0
+"Lock, Stock and Two Smoking Barrels",1998,74.0,3753929,0
+Singin' in the Rain,1952,94.0,1826108,0
+The Straight Story,1999,87.0,6203044,0
+Hang 'Em High,1968,74.0,11000000,0
+Eyes Wide Shut,1999,72.0,55691208,0
+Fallen Angels,1995,81.0,163145,0
+Blood Simple,1984,84.0,3851855,0
+Hair,1979,75.0,15284643,0
+American Beauty,1999,84.0,130096601,0
+Ronin,1998,69.0,41616262,0
+"Farewell, My Lovely",1975,71.0,0,0
+Desperado,1995,64.0,25405445,0
+Johnny English,2003,48.0,28082366,0
+Psycho,1960,92.0,32000000,0
+Jackie Brown,1997,75.0,39673162,0
+Mamma Mia!,2008,56.0,144169664,0
+A Bronx Tale,1993,85.0,17287898,0
+Easy Rider,1969,80.0,123276,0
+Beverly Hills Cop II,1987,53.0,153665036,0
+Pirates of the Caribbean: The Curse of the Black Pearl,2003,74.0,305413918,0
+Taxi Driver,1976,90.0,28262574,0
+Magnolia,1999,80.0,22455976,0
+The Last of the Mohicans,1992,82.0,75505856,0
+8 Mile,2002,74.0,116750901,0
+Harry Potter and the Sorcerer's Stone,2001,74.0,318087620,0
+Gladiator,2000,76.0,187705427,0
+The Wizard of Oz,1939,90.0,24438411,0
+"One, Two, Three",1961,81.0,0,0
+Phantasm,1979,71.0,11988469,0
+Midnight Cowboy,1969,81.0,44785053,0
+The Magnificent Seven,1960,62.0,93432655,0
+The Great Escape,1963,87.0,0,0
+Manhunter,1986,80.0,8620929,0
+The Thomas Crown Affair,1999,70.0,69305181,0
+Rocky III,1982,63.0,125049125,0
+Gunfight at the O.K. Corral,1957,71.0,0,0
+A View to a Kill,1985,47.0,50327960,0
+Mulholland Drive,2001,82.0,7220243,0
+The Third Man,1949,92.0,1067364,0
+The Sting,1973,86.0,156000000,0
+Kill Bill: Vol. 1,2003,78.0,70099045,0
+"Duck, You Sucker!",1971,81.0,0,0
+Trainspotting,1996,85.0,16491080,0
+The Seventh Seal,1957,88.0,0,0
+Donnie Darko,2001,85.0,1478493,0
+The Terminator,1984,88.0,38371200,0
+The Color of Money,1986,78.0,52293982,0
+Crash,2004,72.0,54580300,0
+Boyz n the Hood,1991,83.0,57504069,1
+Do the Right Thing,1989,88.0,27545445,1
+Coming to America,1988,63.0,128152301,1
+Higher Learning,1995,54.0,38290723,1
+Glory,1989,83.0,26979166,1
+The Mack,1973,62.0,0,1
+Menace II Society,1993,78.0,27912072,1
+Colors,1988,70.0,46616067,1
+The Color Purple,1985,79.0,98467863,1
+New Jack City,1991,68.0,47624353,1
+Super Fly,1972,74.0,0,1
+Paid in Full,2002,57.0,3090862,1
+House Party,1990,78.0,26385627,1
+Harlem Nights,1989,32.0,60864870,1
+Juice,1992,70.0,20146880,1
+Soul Food,1997,73.0,43700855,1
+South Central,1992,77.0,1373196,1
+What's Love Got to Do with It,1993,82.0,39100956,1
+King of New York,1990,69.0,2554476,1
+Love & Basketball,2000,75.0,27459615,1
+Malcolm X,1992,79.0,48169910,1
+Deep Cover,1992,74.0,16639799,1
+Class Act,1992,42.0,13272113,1
+Hustle & Flow,2005,74.0,22202809,1
+Fresh,1994,81.0,8094616,1
+Hoodlum,1997,52.0,23499102,1
+Bad Boys,1995,50.0,65807024,1
+Foxy Brown,1974,57.0,0,1
+In Too Deep,1999,51.0,14011454,1
+CB4,1993,54.0,17953778,1
+Major Payne,1995,43.0,29412050,1
+Life,1999,62.0,30234022,1
+All About the Benjamins,2002,41.0,25916319,1
+Krush Groove,1985,48.0,11052713,1
+I'm Gonna Git You Sucka,1988,58.0,13030057,1
+Amistad,1997,71.0,44229441,1
+Selma,2014,84.0,52076908,1
+Daddy's Little Girls,2007,44.0,31366978,1
+The Wood,1999,61.0,25059640,1
+Friday After Next,2002,39.0,33253609,1
+Norbit,2007,25.0,95673607,1
+The Best Man Holiday,2013,65.0,70525195,1
+Poetic Justice,1993,48.0,27515786,1
+Brown Sugar,2002,63.0,27363891,1
+The Nutty Professor,1996,60.0,128814019,1
+Booty Call,1997,44.0,20050376,1
+Drumline,2002,68.0,56399184,1
+Big Momma's House,2000,38.0,117559438,1
+Shaft,1971,59.0,70334258,1
+Beauty Shop,2005,49.0,36351350,1
+Love Jones,1997,70.0,12479335,1
+Waist Deep,2006,41.0,21344312,1
+Brooklyn's Finest,2009,51.0,27163593,1
+Ricochet,1991,61.0,21756163,1
+Trespass,1992,33.0,24094,1
+Bad Boys II,2003,42.0,138608444,1
+Eve's Bayou,1997,77.0,14842388,1
+Tyler Perry's Why Did I Get Married?,2007,53.0,55204525,1
+Barbershop 2: Back in Business,2004,61.0,65111277,1
+I Can Do Bad All by Myself,2009,54.0,51733921,1
+How Stella Got Her Groove Back,1998,54.0,37672941,1
+Next Friday,2000,41.0,57328603,1
+Lottery Ticket,2010,45.0,24719879,1
+School Daze,1988,56.0,14545844,1
+Crooklyn,1994,70.0,13642861,1
+Are We There Yet?,2005,28.0,82674398,1
+Vampire in Brooklyn,1995,28.0,19751736,1
+Johnson Family Vacation,2004,26.0,31203964,1
+Love Don't Cost a Thing,2003,34.0,21924226,1
+The Honeymooners,2005,25.0,12843849,1
+Big Momma's House 2,2006,29.0,70165972,1
+Nutty Professor II: The Klumps,2000,36.0,123309890,1
+ATL,2006,62.0,21170563,1
+Get Rich or Die Tryin',2005,38.0,30985352,1
