@@ -151,7 +151,7 @@ def main():
     for i in range(1,11):
         time.sleep(1)
         getRatings()
-        hm = (i*25)
+        hm = (i*20)
         print(str(hm) + ' Items Collected')
     
     ratings_csv('ratings.csv')
