@@ -1,7 +1,9 @@
-Movie Title,Movie Date,Average Rating
+Movie Title,Movie Date,Average Rating,Gross,Movie Type
 "The Good, the Bad and the Ugly",1966,91.0,25100000,0
 The Godfather,1972,96.0,134966411,0
 Dr. No,1962,81.0,16067035,0
+For a Few Dollars More,1965,82.0,15000000,0
+A Fistful of Dollars,1964,81.0,14500000,0
 Werckmeister Harmonies,2000,90.0,25461,0
 Scarface,1983,76.0,45408703,0
 The Graduate,1967,83.0,104945305,0

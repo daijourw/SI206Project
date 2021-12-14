@@ -5,11 +5,12 @@ import json
 import sqlite3
 import time
 
-#possibly use dictionary instead of csv bc of racing issue
-#CREATE TABLE Movies (id INTEGER PRIMARY KEY, title TEXT, date INTEGER, genreid TEXT, gross INTEGER, awards TEXT, IMDB REAL, metacritic REAL, rotten_tomatoes REAL, average rating REAL)
-
 
 def getRatings():
+    # This function gathers data from the omdb api, 20 items at a time. It accesses the movie titles in the movie.csv file in order to 
+    # pull multiple movie metrics from the api. This pulled data is then places into the tables of the movieData.db 
+    # database.
+
     api_key = 'd8af6faf'
     rest_rows = []
     with open('movies.csv', 'r') as file:
@@ -21,7 +22,7 @@ def getRatings():
         #next(reader)
         for row in reader:
             #print(row)           
-            if count == 25:
+            if count == 20:
                 rest_rows.append(row)
                 continue
             title = row[0]
@@ -107,8 +108,14 @@ def getRatings():
                 writer = csv.writer(file)
                 writer.writerows(rest_rows)
 
+
 def ratings_csv(filename):
-    header = ('Movie Title', 'Movie Date', 'Average Rating')
+    # This function takes in a csv filename as input, and selects data from the joined tables, Movies and Genres. 
+    # This data is then used to calculate the average critic rating. This calculation is then output into
+    # the ratings.csv file along with the movie title, gross, release date, and movie type.
+
+
+    header = ('Movie Title', 'Movie Date', 'Average Rating', 'Gross', 'Movie Type')
 
     dbName ='movieData.db'
     conn = sqlite3.connect(dbName)
@@ -138,7 +145,10 @@ def ratings_csv(filename):
 
 
 def main():
-    for i in range(1,9):
+    # This function calls the above functions, getRatings, and ratings_csv. In order to gather enough data from 
+    # the api, getRatings is called within a for loop, multiple times.
+
+    for i in range(1,11):
         time.sleep(1)
         getRatings()
         hm = (i*25)
